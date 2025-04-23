@@ -279,6 +279,11 @@ return [
         'winner'                   => 'ganador',
         'work'                     => 'trabajo',
         'year'                     => 'año',
+        'total_rooms'              => 'total de habitaciones',
+        'room_type'                => 'tipo de habitación',
+        'accommodation'            => 'acomodación',
+        'hotel_id'                 => 'ID del hotel',
+        'location'                 => 'Dirección',
 
     ],
 ];
