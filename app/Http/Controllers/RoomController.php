@@ -17,8 +17,11 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $this->roomRepository->create($data);
-        return response()->json(['message' => 'Room created successfully'], 201);
+        $message = $this->roomRepository->create($data);
+        if ($message !== 'Accommodation added successfully') {
+        return response()->json(['message' => $message, 'state' => false], 400); // Bad Reques
+        }
+        return response()->json(['message' => $message, 'state' => true], 201);
     }
 
     public function update(Request $request, $id)

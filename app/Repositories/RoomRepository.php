@@ -41,7 +41,7 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
         $hotel = Hotel::find($data['hotel_id']);
         $this->validateRoomsAccommodationByType($data['room_type'], $data['accommodation']);
         $this->validateRoomsAccommodationByTotalRooms($data['total_rooms'], $hotel);
-        return $this->model->create($data);
+        $this->model->create($data);
         DB::commit();
         return 'Accommodation added successfully';
     } catch (Exception $e) {
