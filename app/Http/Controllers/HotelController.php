@@ -84,11 +84,4 @@ class HotelController extends Controller
         ]);
     }
 
-
-    public function storeRoomsAccommodation(StoreAccommodationToRoomRequest $request)
-    {
-        return response()->json([
-            'message' =>  $this->hotelRepository->addRoomsAccommodation($request->validated())
-        ], 200);
-    }
 }

@@ -36,32 +36,31 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 
     public function create(array $data)
     {
-        try{
-        DB::beginTransaction();
-        $hotel = Hotel::find($data['hotel_id']);
-        $this->validateRoomsAccommodationByType($data['room_type'], $data['accommodation']);
-        $this->validateRoomsAccommodationByTotalRooms($data['total_rooms'], $hotel);
-        $this->model->create($data);
-        DB::commit();
-        return 'Accommodation added successfully';
-    } catch (Exception $e) {
-        DB::rollBack();
-        return $e->getMessage();
-    }
+        try {
+            DB::beginTransaction();
+            $hotel = Hotel::find($data['hotel_id']);
+            $this->validateRoomsAccommodationByType($data['room_type'], $data['accommodation']);
+            $this->validateRoomsAccommodationByTotalRooms($data['total_rooms'], $hotel);
+            $this->model->create($data);
+            DB::commit();
+            return 'Accommodation added successfully';
+        } catch (Exception $e) {
+            DB::rollBack();
+            return 'Ya existen habitaciones con este tipo de acomodación en este hotel';
+        }
     }
 
     public function update($id, array $data)
     {
-        try{
-        DB::beginTransaction();
-        $hotel = Hotel::find($data['hotel_id']);
-        $this->validateRoomsAccommodationByType($data['room_type'], $data['accommodation']);
-        $this->validateRoomsAccommodationByTotalRooms($data['total_rooms'], $hotel, $id);
-        $this->model->find($id)->update($data);
-        DB::commit();
-        return 'Accommodation updated successfully';
-        }
-        catch (Exception $e) {
+        try {
+            DB::beginTransaction();
+            $hotel = Hotel::find($data['hotel_id']);
+            $this->validateRoomsAccommodationByType($data['room_type'], $data['accommodation']);
+            $this->validateRoomsAccommodationByTotalRooms($data['total_rooms'], $hotel, $id);
+            $this->model->find($id)->update($data);
+            DB::commit();
+            return 'Accommodation updated successfully';
+        } catch (Exception $e) {
             DB::rollBack();
             return $e->getMessage();
         }
